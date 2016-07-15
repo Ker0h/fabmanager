@@ -1,0 +1,76 @@
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<%= bootstrap_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :multipart => true }) do |f| %>
+  <%= devise_error_messages! %>
+
+    <div class="field">
+    <%= f.text_field :first_name, label: "Voornaam" %>
+  </div>
+  <div class="field">
+    <%= f.text_field :surname, label: "Achternaam" %>
+  </div>
+  <div class="field">
+    <%= f.date_select :date_of_birth, label: "Geboortedatum" %>
+  </div>
+  <div class="field">
+    <%= f.form_group :gender, label: {text: "Geslacht"} do %>
+      <%= f.radio_button :gender, "Man", label: "Man" %>
+      <%= f.radio_button :gender, "Vrouw", label: "Vrouw" %>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.form_group :country, label: {text: "Land"} do %>
+      <%= f.radio_button :country, "Nederland", label: "Nederland" %>
+      <%= f.radio_button :country, "België", label: "België" %>
+  <% end %>
+  </div>
+  <div class="field">
+    <%= f.text_field :province, label: "Provincie" %>
+  </div>
+  <div class="field">
+    <%= f.text_field :city, label: "Woonplaats" %>
+  </div>
+
+  <div class="field">
+    <%= f.text_field :username, label: "Gebruikersnaam" %>
+  </div>
+  <div class="field">
+    <%= f.email_field :email, autofocus: true, label: "E-mail" %>
+  </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div class="field">
+  <%= f.label "Nieuw wachtwoord" %> <i>(Laat leeg als u uw wachtwoord niet wil veranderen)</i><br />
+    <%= f.password_field :password, autocomplete: "off", hide_label: true %>
+  </div>
+
+  <div class="field">
+    <%= f.password_field :password_confirmation, autocomplete: "off", label: "Wachtwoord bevestigen" %>
+  </div>
+
+  <div class="field">
+  <%= f.label "Huidig wachtwoord" %> <i>(We hebben uw huidige wachtwoord nodig als u de wijzigingen wil toepassen)</i><br />
+    <%= f.password_field :current_password, autocomplete: "off", hide_label: true %>
+  </div>
+
+  <%= image_tag @user.avatar.url, label: "Huidige profielfoto" %>
+
+  <div class="field">
+    <%= f.file_field :avatar, label: "Profielfoto wijzigen" %>
+    <%= f.hidden_field :avatar_cache %>
+    <%= f.check_box :remove_avatar, label: "Profielfoto verwijderen" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Wijzigingen opslaan" %>
+  </div>
+<% end %>
+
+<h3>Cancel my account</h3>
+
+<p><%= button_to "Mijn account verwijderen", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+
+<%= button_to "Terug", :back, method: "get" %>

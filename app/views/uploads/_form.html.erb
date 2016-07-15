@@ -1,0 +1,4 @@
+<%= fields_for :uploads, child_index: index do |ff| %>
+	<%= ff.file_field :image, label: "Abeelding ##{index += 1}" %>
+	<% #ff.hidden_field :image_cache %>
+<% end %>

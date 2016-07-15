@@ -1,0 +1,149 @@
+<div class = "title-div">
+<p>
+ <h1><%= @fabmoment.title.capitalize %></h1>
+</p> <br />
+<% if !@fabmoment.user.archived_at? %>
+<b>Maker: </b><br />
+<%= image_tag(@fabmoment.user.avatar.url, class: "thumb_img") if @fabmoment.user.avatar? %>
+<b><i><%= link_to @fabmoment.user.username, @fabmoment.user %></i></b>
+
+<% else %>
+<b>Maker: </b><br />
+<b><i><%= @fabmoment.user.username %></i></b>
+<% end %>
+</div><br />
+
+<p>
+	<%= image_tag @fabmoment.image.url if @fabmoment.image? %>
+</p>
+</div>
+
+<p>
+	<strong>Naamsvermelding</strong>
+</p>
+
+<p><%= @fabmoment.rights %></p>
+
+<p>
+  <strong>Beschrijving: </strong>
+</p>
+
+<p><%= @fabmoment.desc %></p>
+
+<!-- Machines -->
+<p>
+	<strong>Machines</strong>
+<p>
+
+<% @fabmoment.machines.each do |machine| %>
+<p>
+	<%= machine.name %>
+</p>
+<% end %>
+
+<p><strong>Werkwijze</strong></p>
+<p><%= @fabmoment.mo %></p>
+
+
+<p><strong>Instellingen machines</strong></p>
+<p><%= @fabmoment.settings %></p>
+
+<!-- Software -->
+<p><strong>Programma's gebruikt</strong></p>
+<% @fabmoment.programs.each do |program| %>
+	<p>
+		<%= program.name %>
+	</p>
+<% end %>
+
+<!-- Materials -->
+<p><strong>Materialen gebruikt</strong></p>
+<% @fabmoment.materials.each do |material| %>
+	<p>
+		<%= "#{material.sort} #{material.name}" %>
+		<%= "#{material.thickness}mm" if material.thickness? %>
+	</p>
+<% end %>
+
+<p><strong>Wat ging er goed?</strong></p>
+<p><%= @fabmoment.wentwell %></p>
+
+<p><strong>Wat ging er minder goed?</strong></p>
+<p><%= @fabmoment.wentbad %></p>
+
+<p><strong>Wat wil je de volgende keer verbeteren?</strong></p>
+<p><%= @fabmoment.nexttime %></p>
+
+<p><strong>Is dit project gebaseerd op een ander Fabmoment?</strong></p>
+<% if @fabmoment.basedon? %>
+<p>Ja, <%= @fabmoment.basedon %></p>
+<% else %>
+<p>Nee</p>
+<% end %>
+
+<% if @fabmoment.sources? %>
+<p><strong>Verscheidene interessante bronnen</strong></p>
+<p><%= @fabmoment.sources %></p>
+<% end %>
+
+<% if @fabmoment.file? %>
+<strong>Projectbestand</strong>
+<p><%= link_to "Download bestand", action: "download_file", id: @fabmoment.id, method: "get" %></p>
+<% end %>
+</div>
+
+<% if @fabmoment.tags.any? %>
+<table>
+	<tr id="tags">
+		<th>Tags:</th>
+		<td><%= render @fabmoment.tags, fabmoment: @fabmoment %></td>
+	</tr>
+</table>
+<% end %>
+
+
+<div class='actions'>
+<table>
+<tr>
+<% if current_user && (current_user == @fabmoment.user || current_user.admin?) %>
+	<td>
+	<%= button_to "Wijzigen", edit_fabmoment_path(@fabmoment), method: "get", class: "btn btn-default" %>
+	</td>
+<% end %>
+<% if current_user && current_user.admin? %>
+	<td>
+	<%= button_to 'Verwijderen', fabmoment_path(@fabmoment), class: "btn btn-danger",
+		method: :delete,
+		data: {confirm: 'Weet u het zeker?'} %>
+	</td>
+<% end %>
+</tr>
+</table>
+</div>
+
+<!-- Add comments and comment form here -->
+
+<h3>Comments</h3>
+<%= render @fabmoment.comments %>
+
+<h3>Nieuwe comment</h3>
+<!--<%= form_for [@fabmoment, @fabmoment.comments.build] do |f| %>
+	<div class="field">
+		<%= f.text_field :title, :placeholder => "Titel" %>
+	</div>
+
+	<div class="field">
+		<%= f.text_area :content, :placeholder => "Comment" %>
+	</div>
+
+	<div class="actions">
+		<%= f.submit %>
+	</div>
+<% end %>-->
+<%= render 'fabmoments/new_comment_form', fabmoment:@fabmoment, comment: @fabmoment.comments.build %>
+
+<div class = "actions">
+<p><%= button_to "Terug", fabmoments_path, method: "get", class: "btn btn-default" %></p>
+</div>
+
+

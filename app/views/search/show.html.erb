@@ -1,0 +1,29 @@
+<%= form_tag fabmoments_path, :method => 'get' do %>
+  <p align="center">
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Zoeken", :name => nil, class: "btn btn-primary" %>
+
+    <select name="machine_filter">
+    	<option value= "" selected>Geen</option>
+    	<option value= "1">Ultimaker Original</option>
+    	<option value= 2>Ultimaker Original Plus</option>
+    	<option value= 3>Ultimaker Two</option>
+    	<option value= 4>Ultimaker Two Plus</option>
+    	<option value= 5>Lasersnijder</option>
+    	<option value= 6>Vinylsnijder</option>
+    	<option value= 7>3D Scanner</option>
+    </select>
+
+    <select name="material_filter">
+    	<option value= "" selected>Geen</option>
+    	<option value="pla">PLA</option>
+    </select>
+
+    <select name="software_filter">
+    	<option value= "" selected>Geen</option>
+    	<option value="software_tinkercad">Tinkercad</option>
+    </select>
+
+    <%= submit_tag "Filter", :name => nil, class: "btn btn-primary" %>
+  </p>
+<% end %>

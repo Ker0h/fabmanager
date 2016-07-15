@@ -1,0 +1,8 @@
+<div class="tag">
+<% if current_user.admin? || current_user == @fabmoment.user %>
+	<%= link_to "<span>X</span>".html_safe,
+	remove_fabmoment_tag_path(fabmoment, tag), method: :delete, remote: true, class: "remove",
+	title: "remove" %>
+<% end %>
+	<%= link_to tag.name, tag_path(tag.name) %>
+</div>

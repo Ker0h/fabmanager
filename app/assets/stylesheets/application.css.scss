@@ -1,0 +1,133 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "rails_bootstrap_forms";
+@import "bootstrap-table";
+
+
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ */
+body {
+ 	background: #fff;
+ 	font-family: 'Open Sans', sans-serif;
+ 	font-weight: 400;
+ 	width: 97%;
+ 	max-width: 1200px;
+ 	margin: 0px auto;
+ 	padding: 0 10px;
+}
+
+.jumbotron {
+    background: #fff;
+}
+
+.title-field {
+    width: 20%;
+}
+
+.field {
+    width: 50%;
+    height: 25%;
+}
+
+.site-logo-img {
+    height: auto;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+
+.navbar-default {
+    background: #009EE3;
+    box-shadow: 0px 1px 1px 1px #626262, 0px -27px 15px -15px rgba(0, 68, 98, 0.75) inset;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    z-index: 95;
+    clear: both;
+    position: relative;
+    /* width: 87%; */
+    margin-top: 0px;
+    margin-right: auto;
+    margin-bottom: 12px;
+    margin-left: auto;
+}
+
+.navbar-btn {
+	background: transparent;
+	border: transparent;
+	color: #FFF
+}
+
+ img {
+ 	width: 20%;
+    vertical-align: middle;
+    padding: 20px;
+ }
+
+ table {
+    width: 100%;
+ }
+
+th {
+    height: 50px;
+}
+
+th, tr {
+    border-bottom: 1px solid #ddd;
+    padding: 20px;
+}
+
+
+.thumb_img {
+    width: 10%;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.jumbotron {
+    padding-top: 0px;
+    padding-bottom: 10px;
+}
+
+.footer {
+    background: rgb(0, 158, 227) none repeat scroll 0% 0%;
+    box-shadow: 0px 1px 3px 1px #868686, 0px -27px 15px -15px rgb(0, 68, 98) inset;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    margin-bottom: 15px;
+    height: 50px;
+    vertical-align: bottom;
+}
+
+.mlogo {
+    text-align: center;
+    font-weight: 400;
+    padding: 12px 0 0 12px;
+    color: #FFFFFF;
+    min-height: 37px;
+}
+
+
+.push {
+    height: 200px; /* .push must be the same height as .footer */
+    position: static;
+}
+
+.mlogo-a {
+    color: #FFFFFF;
+}
+

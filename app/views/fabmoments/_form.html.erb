@@ -1,0 +1,357 @@
+<%= bootstrap_form_for(@fabmoment, multipart: true) do |f| %>
+  <% if @fabmoment.errors.any? %>
+    <div id="error_explanation">
+      <h2>Er is/zijn <%= pluralize(@fabmoment.errors.count, "error") %> geconstateerd
+        :</h2>
+
+      <ul>
+      <% @fabmoment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="title-field">
+    <%= f.text_field :title, label: "Titel" %>
+  </div>
+
+  <div class="field">
+    <%= f.file_field :image, label: "Afbeelding" %>
+  </div>
+
+  <div class="field">
+    <%= f.text_area :desc, label: "Beschrijving" %>
+  </div>
+
+  <div class='field'>
+  <% if false %>
+  <b>Rechten</b><br>
+    <p>
+    <%= f.radio_button :rights, 'Naamsvermelding' %> Naamsvermelding <br />
+    <%= f.radio_button :rights, 'Naamsvermelding gelijk delen' %> Naamsvermelding gelijk delen <br />
+    <%= f.radio_button :rights, 'Naamsvermelding niet commercieel' %> Naamsvermelding niet commercieel <br />
+    <%= f.radio_button :rights, 'Naamsvermelding niet commercieel gelijk delen' %> Naamsvermelding niet commercieel gelijk delen <br />
+    <%= f.radio_button :rights, 'Naamsvermelding geen afgeleide werken' %> Naamsvermelding geen afgeleide werken <br />
+    <%= f.radio_button :rights, 'Naamsvermelding niet commercieel geen afgeleide werken' %> Naamsverwelding niet commercieel geen afgeleide werken <br />
+    </p>
+  <% end %>
+
+    <%= f.form_group :rights, label: {text: "Rechten"} do %>
+        <%= f.radio_button :rights, "Naamsvermelding", label: "Naamsvermelding" %>
+        <%= f.radio_button :rights, "Naamsvermelding gelijk delen", label: "Naamsvermelding gelijk delen" %>
+        <%= f.radio_button :rights, "Naamsvermelding niet commercieel", label: "Naamsvermelding niet commercieel" %>
+        <%= f.radio_button :rights, "Naamsvermelding niet commercieel, gelijk delen", label: "Naamsvermelding niet commercieel, gelijk delen" %>
+        <%= f.radio_button :rights, "Naamsvermelding geen afgeleide werken", label: "Naamsvermelding geen afgeleide werken" %>
+        <%= f.radio_button :rights, "Naamsvermelding niet commercieel, geen afgeleide werken", label: "Naamsvermelding niet commercieel, geen afgeleide werken" %>
+    <% end %>
+
+      </div>
+
+  <div class='field'>
+<% if false %>
+    <b>Machines</b>
+
+        <div id="printers">
+          <p><%= f.check_box :machines_ultimaker_original, label: "Ultimaker Original" %></p>
+          <p><%= f.check_box :machines_ultimaker_original_plus, label: "Ultimaker Original Plus" %></p>
+          <p><%= f.check_box :machines_ultimaker_two, label: "Ultimaker 2" %></p>
+          <p><%= f.check_box :machines_ultimaker_two_plus, label: "Ultimaker 2 Plus" %></p> 
+        </div>
+
+    <p><%= f.check_box :machines_lasercutter, label: "Lasersnijder" %></p>
+    <p><%= f.check_box :machines_vinylcutter, label: "Vinylsnijder" %></p>
+    <p><%= f.check_box :machines_scanner, label: "3D Scanner" %></p>
+  </div>
+<% end %>
+
+<% if false %>
+ <label for="machines">Machines</label>
+<ul class="list-unstyled">
+  <% @machines.each do |machine| %>
+    <li>
+      <input type="checkbox" name="fabmoment[machine_ids][]" value="<%= machine.id %>" 
+                  id="<%="fabmoment_machines_" + machine.name.downcase.parameterize("_")%>"> 
+      <%= machine.name %>
+    </li>
+  <% end %>
+</ul>
+<% end %>
+
+<%= f.label "Machines" %>
+<%= f.collection_check_boxes :machine_ids, Machine.all, :id, :name do |m| %>
+  <div>
+  <%= m.check_box %>
+  <%= m.label(id: "fabmoment_machines_#{m.name.downcase.parameterize("_")}") %>
+  </div>
+<% end %>
+
+  <div class="field">
+    <%= f.text_area :settings, label: "Instellingen machines" %>
+  </div>
+
+  <% if false %>
+  <div class = "field">
+    <b>Gebruikte software</b>
+
+    <p><%= f.check_box :software_illustrator, label: "Adobe Illustrator" %></p>
+    <p><%= f.check_box :software_tinkercad, label: "Tinkercad" %></p>
+    <p><%= f.check_box :software_sketchup, label: "SketchUp" %></p>
+    <p><%= f.check_box :software_inkscape, label: "Inkscape" %></p>
+    <p><%= f.check_box :software_blender, label: "Blender" %></p>
+  </div>
+<% end %>
+
+<% if false %>
+ <label for="programs">Programma's</label>
+  <ul class="list-unstyled">
+    <% @programs.each do |program| %>
+      <li>
+        <input type="checkbox" name="fabmoment[program_ids][]" value="<%= program.id %>"> 
+        <%= program.name %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+  <%= f.collection_check_boxes :program_ids, Program.all, :id, :name do |p| %>
+    <div>
+    <%= p.check_box %>
+    <%= p.label %>
+    </div>
+  <% end %>
+
+<% if false %>
+  <div class="field">
+    <p id='mat-header'>
+      <b>Welke materialen heb je gebruikt?</b><br />
+      <i>Dit hangt af van de geselecteerde machines</i>
+    </p>
+
+    <div id='lasercutter_mat' style="display:none;">
+      <%= f.check_box :multiplex_3mm, label: "Multiplex 3mm" %>
+      <%= f.check_box :multiplex_4mm, label: "Multiplex 4mm" %>
+      <%= f.check_box :multiplex_6mm, label: "Multiplex 6mm" %>
+      <%= f.check_box :plexiglas_trans_3mm, label: "Plexiglas Transparant 3mm" %>
+      <%= f.check_box :plexiglas_trans_5mm, label: "Plexiglas Transparant 5mm" %>
+      <%= f.check_box :plexiglas_trans_10mm, label: "Plexiglas Transparant 10mm" %>
+      <%= f.check_box :plexiglas_trans_15mm, label: "Plexiglas Transparant 15mm" %>
+      <%= f.check_box :plexiglas_white_3mm, label: "Plexiglas Wit 3mm" %>
+      <%= f.check_box :plexiglas_white_5mm, label: "Plexiglas Wit 5mm" %>
+      <%= f.check_box :plexiglas_blue_3mm, label: "Plexiglas Blauw 3mm" %>
+      <%= f.check_box :plexiglas_ylw_3mm, label: "Plexiglas Geel 3mm" %>
+      <%= f.check_box :plexiglas_grn_trans_3mm, label: "Plexiglas Groen Transparant 3mm" %>
+      <%= f.check_box :plexiglas_red_trans_3mm, label: "Plexiglas Rood Transparant 3mm" %>
+      <%= f.check_box :cardboard, label: "Karton" %>
+      <%= f.check_box :cardboard_wave, label: "Karton (golf)" %>
+    </div>
+
+    <div id='vinylcutter_mat' style='display:none;'>
+      <%= f.check_box :vinyl, label: "Vinyl (Div. kleuren)" %>
+      <%= f.check_box :foil, label: "Applicatiefolie" %>
+    </div>
+
+    <div id='printer_mat' style='display:none;'>
+      <%= f.check_box :pla, label: "PLA Ultimaker" %>
+    </div>
+  </div>
+<% end %>
+
+<div id="lasercutter_mat" style='display:none;'>
+<%= f.collection_check_boxes :material_ids, Material.where(sort: "Multiplex"), :id, :sort %>
+<%= f.collection_check_boxes :material_ids, Material.where(sort: "Plexiglas"), :id, :sort %>
+<%= f.collection_check_boxes :material_ids, Material.where(sort: "Karton"), :id, :sort %>
+</div>
+
+<div id="vinylcutter_mat" style='display:none;'>
+<%= f.collection_check_boxes :material_ids, Material.where(sort: "Vinyl"), :id, :sort %>
+<%= f.collection_check_boxes :material_ids, Material.where(sort: "Folie"), :id, :sort %>
+</div>
+
+<div id="printer_mat" style='display:none;'>
+<%= f.collection_check_boxes :material_ids, Material.where(sort: "PLA"), :id, :sort %>
+</div>
+
+  <div class="field">
+    <b>Werkwijze</b><br>
+    <%= f.text_area :mo, hide_label: true %>
+  </div>
+
+  <div class="field">
+    <b>Wat ging er goed?</b><br>
+    <%= f.text_area :wentwell, hide_label: true %>
+  </div>
+
+  <div class="field">
+    <b>Wat ging er minder goed?</b><br>
+    <%= f.text_area :wentbad, hide_label: true%><br>
+  </div>
+
+  <div class="field">
+    <b>Wat wil je de volgende keer verbeteren?</b><br>
+    <%= f.text_area :nexttime, hide_label: true %>
+  </div>
+
+  <div class="field">
+    <b>Is jouw project gebaseerd op een ander Fabmoment?</b><br>
+    <%= f.check_box :is_basedon, label: "Ja", checked: false %><br />
+
+    <div id="basedon_details" style="display:none;">
+      <%= f.text_area :basedon, hide_label: true, placeholder: "Op welk Fabmoment heeft u het gebaseerd?" %>
+    </div>
+
+  </div>
+
+  <div class="field">
+        <%= f.text_area :sources, label: "Interessante bronnen" %>
+  </div>
+
+  <div class="field">
+    <%= f.file_field :file, label: "Projectbestand" %>
+  </div>
+
+  <div class="field">
+    <b>Tags</b><br />
+    <i>Scheiden met een spatie</i>
+    <%= f.text_field :tag_names, label: nil %>
+  </div>
+
+  <div class="actions">
+  <p><%= f.primary %></p>
+  </div>
+<% end %>
+
+
+<script type="text/javascript">
+var basedon_checkbox = document.getElementById('fabmoment_is_basedon');
+var details_div = document.getElementById('basedon_details');
+
+//var mat_header = document.getElementById('mat-header');
+var ultimaker_original_checkbox = document.getElementById('fabmoment_machine_ids_1');
+var ultimaker_original_plus_checkbox = document.getElementById('fabmoment_machine_ids_2');
+var ultimaker_two_checkbox = document.getElementById('fabmoment_machine_ids_3');
+var ultimaker_two_plus_checkbox = document.getElementById('fabmoment_machine_ids_4');
+
+var printerCheckCount = 0;
+
+var lasercutter_checkbox = document.getElementById('fabmoment_machine_ids_5');
+var vinylcutter_checkbox = document.getElementById('fabmoment_machine_ids_6');
+
+var printer_mat_div = document.getElementById('printer_mat')
+var lasercutter_mat_div = document.getElementById('lasercutter_mat');
+var vinylcutter_mat_div = document.getElementById('vinylcutter_mat');
+
+basedon_checkbox.onchange = function() {
+  if(this.checked) {
+    details_div.style['display'] = 'block';
+
+  } else {
+    details_div.style['display'] = 'none';
+  }
+};
+
+ultimaker_original_checkbox.onchange = function() {
+  if(this.checked) {
+    printerCheckCount++
+    
+    if(printerCheckCount > 0) {
+      printer_mat_div.style['display'] = 'block';
+    } else {
+      printer_mat_div.style['display'] = 'none'
+    }
+
+  } else {
+    printerCheckCount--
+
+    if(printerCheckCount > 0) {
+      printer_mat_div.style['display'] = 'block';
+    } else {
+    printer_mat_div.style['display'] = 'none'
+    }    
+  }
+};
+
+ultimaker_original_plus_checkbox.onchange = function() {
+  if(this.checked) {
+    printerCheckCount++
+    
+    if(printerCheckCount > 0) {
+      printer_mat_div.style['display'] = 'block';
+    } else {
+      printer_mat_div.style['display'] = 'none'
+    }
+
+  } else {
+    printerCheckCount--
+
+    if(printerCheckCount > 0) {
+      printer_mat_div.style['display'] = 'block';
+    } else {
+    printer_mat_div.style['display'] = 'none'
+    }    
+  }
+};
+
+ultimaker_two_checkbox.onchange = function() {
+  if(this.checked) {
+    printerCheckCount++
+    
+    if(printerCheckCount > 0) {
+      printer_mat_div.style['display'] = 'block';
+    } else {
+      printer_mat_div.style['display'] = 'none'
+    }
+
+  } else {
+    printerCheckCount--
+
+    if(printerCheckCount > 0) {
+      printer_mat_div.style['display'] = 'block';
+    } else {
+    printer_mat_div.style['display'] = 'none'
+    }    
+  }
+};
+
+ultimaker_two_plus_checkbox.onchange = function() {
+  if(this.checked) {
+    printerCheckCount++
+    
+    if(printerCheckCount > 0) {
+      printer_mat_div.style['display'] = 'block';
+    } else {
+      printer_mat_div.style['display'] = 'none'
+    }
+
+  } else {
+    printerCheckCount--
+
+    if(printerCheckCount > 0) {
+      printer_mat_div.style['display'] = 'block';
+    } else {
+    printer_mat_div.style['display'] = 'none'
+    }    
+  }
+};
+
+
+lasercutter_checkbox.onchange = function() {
+  if(this.checked) {
+    lasercutter_mat_div.style['display'] = 'block';
+  } else {
+    lasercutter_mat_div.style['display'] = 'none'
+  }
+};
+
+vinylcutter_checkbox.onchange = function() {
+  if(this.checked) {
+    vinylcutter_mat_div.style['display'] = 'block';
+  } else {
+    vinylcutter_mat_div.style['display'] = 'none'
+  }
+};
+
+
+
+
+</script>

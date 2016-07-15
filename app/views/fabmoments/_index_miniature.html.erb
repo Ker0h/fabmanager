@@ -1,0 +1,20 @@
+<table>
+	<tr>
+		<td><h3><%= fabmoment.title %></h3><td>
+	</tr>
+	<tr>
+		<td><%= image_tag fabmoment.image.url class: "thumb_img" if fabmoment.image? %></td>
+	</tr>
+	<tr>
+		<td>
+		<ul>
+		<% fabmoment.tags.each do |tag| %>
+			<li><%= link_to tag.name, tag_path(tag) %></li>
+		<% end %>
+		</ul>
+		</td>
+	</tr>
+</table>
+<p>
+	<%= button_to "Verder met lezen", fabmoment_path(fabmoment), method: "get", class: "btn btn-default btn-primary" %>
+</p>

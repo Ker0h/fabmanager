@@ -1,0 +1,35 @@
+<div class="jumbotron">
+<h1>Welkom bij de Fabmanager</h1>
+
+<p>Met een FabMoment laat je ziet wat jij in FabLab Zeeland gemaakt hebt. Je inspireert zo anderen met wat jij gemaakt hebt.</p><br />
+<p>Welke informatie ga jij delen?</p>
+<ul>
+	<li>Hoe heb je het gemaakt?</li>
+	<li>Welke machines heb je gebruikt?</li>
+	<li>Welke instellingen heb je gebruikt></li>
+	<li>Welke bestanden heb je gebruikt?</li>
+	<li>Welke materialen heb je gebruikt?</li>
+	<li>Wat heb je geleerd?</li>
+	<li>Wat moeten mensen wten als ze iets vergelijkbaars gaan maken?</li>
+</ul>
+<p>Hoe deel je de informatie?</p>
+<ol>
+	<li>Registreer jezelf op fabmoment.fablabzeeland.com</li>
+	<li>Plaats een nieuw bericht en zorg dat de titel duidelijk is</li>
+	<li>Omschrijf jouw project, gebruikte machines, programma’s, materialen en geef aan wat er goed en/of 	fout ging.</li>	
+	<li>Voeg een foto toe aan het bericht van het eindresultaat, tekening of ECP-bestand van de laser.</li>
+	<li>Kies één of meerdere toepasselijke categorieën</li>	
+	<li>Voeg tags toe (trefwoorden)</li>
+	<li>Publiceer het bericht</li>
+</ol>
+</div>
+
+<!--Button to FL Zeeland page on dezb.nl-->
+<% if false %>
+<p><%= button_to "Website van Fablab Zeeland", "http://www.dezb.nl/wat-we-doen/fablabzeeland.html", method: "get", class: "btn btn-primary btn-lg", form: {target: '_blank'} %></p>
+<% end %>
+
+<h2>Recente Fabmomenten</h2>
+<% @fabmoments.each do |fm| %>
+		<%= render 'fabmoments/index_miniature', fabmoment:fm %>
+<% end %>

@@ -1,0 +1,25 @@
+<%= form_for [@fabmoment, @fabmoment.comments.build] do |f| %>
+  <% if @fabmoment.comments.build.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@fabmoment.comments.build.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+      <% @fabmoment.comments.build.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+	<div class="field">
+		<%= f.text_field :title, :placeholder => "Titel" %>
+	</div>
+
+	<div class="field">
+		<%= f.text_area :content, :placeholder => "Comment" %>
+	</div>
+
+	<div class="actions">
+		<%= f.submit class: "btn btn-primary" %>
+	</div>
+<% end %>

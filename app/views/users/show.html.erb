@@ -1,0 +1,51 @@
+<%= image_tag @user.avatar.url if @user.avatar? %> 
+
+<div>
+<table>
+<tr>
+	<td><b>Naam: </b></td>
+	<td><%= @user.first_name %> <%= @user.surname %></td>
+</tr>
+<tr>
+	<td><b>Geslacht: </b></td>
+	<td><%= @user.gender %></td>
+</tr>
+<tr>
+	<td><b>Geboortedatum: </b></td>
+	<td><%= @user.date_of_birth %></td>
+</tr>
+<tr>
+	<td><b>Land: </b></td>
+	<td><%= @user.country %></td>
+</tr>
+<tr>
+	<td><b>Provincie: </b></td>
+	<td><%= @user.province %></td>
+</tr>
+<tr>
+	<td><b>Woonplaats: </b></td>
+	<td><%= @user.city %></td>
+</tr>
+<tr>
+	<td><b>Email: </b></td>
+	<td><%= @user.email %></td>
+</tr>
+</table>
+</div>
+
+<div>
+	<h2>Fabmomenten van: <%= @user.username %></h2>
+	<% @user.fabmoments.each do |fm| %>
+			<%= render 'fabmoments/index_miniature', fabmoment:fm %>
+	<% end %>	
+</div>
+
+<% if current_user == @user %>
+<%= button_to "Profiel wijzigen", edit_user_registration_path, method: 'get', class: "btn btn-default" %>
+<% end %>
+
+<% if current_user.admin? %>
+	<p><%= button_to "Deze account verwijderen", [:archive, @user], data: { confirm: "Weet u het zeker?"}, method: :patch, class: "btn btn-default" %></p>
+
+<% end %>
+

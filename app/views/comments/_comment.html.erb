@@ -1,0 +1,24 @@
+<table>
+<tr>
+<td>
+<h2><%= comment.title %> </h2>
+
+<blockquote>
+	<%= comment.content %>
+</blockquote>
+
+<b><%= link_to comment.user.username, comment.user %></b>
+</td>
+
+<% if current_user == comment.user || current_user.admin? %>
+<td>
+<%= button_to 'Wijzigen', [:edit, comment.fabmoment, comment], method:"get", class: "btn btn-default" %><br />
+<%= button_to 'Verwijderen', [comment.fabmoment, comment], class: "btn btn-mini btn-danger btn-default",
+	method: "delete", data: {confirm: "Weet u het zeker?"} %>
+</td> 
+<% end %>
+</tr>
+
+</table>
+
+

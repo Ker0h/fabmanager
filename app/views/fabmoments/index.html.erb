@@ -1,0 +1,42 @@
+<h1>Fabmomenten</h1>
+
+<!--<table>
+  <tbody>
+    <% @fabmoments.each do |fabmoment| %>
+      <tr>
+        <td>
+          <h2><%= link_to fabmoment.title, fabmoment_path(fabmoment) %></h2>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>-->
+
+<%= render 'search' %>
+
+<% machine = Machine.find(1) %>
+<% #fabmoments =  %>
+<% fabmoments = Fabmoment.where(machine: machine).pluck(:title) %>
+
+<% fabmoments.each do |fm| %>
+    <%= fm %>
+<% end %>
+
+<% if false %>
+<div class="tags-cloud glassy-bg" align="right">
+  <h4>Tags</h4>
+  <% tag_cloud Tag.limit(5).counts, %w{css1 css2 css3 css4} do |tag, css_class| %>
+    <%= link_to tag.at(0).at(1), tag_path(tag), class: css_class %><br />
+  <% end %>
+</div>
+<% end %>
+
+<% @fabmoments.each do |fm| %>
+		<%= render 'fabmoments/index_miniature', fabmoment:fm %>
+<% end %>
+
+<br>
+
+<h3>
+	<%= link_to 'Nieuw Fabmoment', new_fabmoment_path %>
+</h3>

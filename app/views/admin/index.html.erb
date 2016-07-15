@@ -1,0 +1,26 @@
+<table>
+	<tr>
+		<th colspan="2">Gebruiker</th>
+		<th>Laatste login</th>
+		<th>Admin</th>
+		<th></th>
+	</tr>
+<% @users.each do |user| %>
+	<tr border="1px solid black">
+		<td><%= user.id %></td>
+		<td><%= link_to user.username, user %></td>
+		<td><%= user.last_sign_in_at %></td>
+		<% if user.admin? %>
+		<td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+		<% else %>
+		<td></td>
+		<% end %>
+		<% if !user.admin? %>
+		<td align="center"><%= button_to "Deze account Admin-rechten geven", {action: "update_to_admin", controller: "users", id: user.id}, method: :put, class: "btn btn-default" %></td>
+		<% else %>
+		<td align="center"><%= button_to "Admin-rechten verwijderen", {action: "downgrade_to_user", controller: "users", id: user.id},
+			method: :put, class: "btn btn-default" %></td>
+		<% end %>
+	</tr>
+<% end %>
+</table>

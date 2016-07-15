@@ -1,0 +1,10 @@
+<%= form_tag fabmoments_path, :method => 'get' do %>
+  <p align="right">
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Zoeken", :name => nil, class: "btn btn-primary" %>
+  </p>
+<% end %>
+
+<div align="right">
+  <%= button_to "Uitgebreid zoeken", search_path, method: "get", class: "btn btn-xs btn-primary" %>
+</div>
