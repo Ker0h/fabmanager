@@ -5,8 +5,7 @@ class Fabmoment < ActiveRecord::Base
 	has_many :comments, dependent: :destroy
 	has_many :fabmoments_tags
 	has_many :tags, through: :fabmoments_tags
-	has_many :machines, through: :fabmoments_machines
-	accepts_nested_attributes_for :machines
+	has_and_belongs_to_many :machines
 	has_and_belongs_to_many :programs
 	has_and_belongs_to_many :materials
 	#has_many :materials, through: :fabmoments_materials
