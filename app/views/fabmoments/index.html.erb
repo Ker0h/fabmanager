@@ -14,14 +14,6 @@
 
 <%= render 'search' %>
 
-<% machine = Machine.find(1) %>
-<% #fabmoments =  %>
-<% fabmoments = Fabmoment.where(machine: machine).pluck(:title) %>
-
-<% fabmoments.each do |fm| %>
-    <%= fm %>
-<% end %>
-
 <% if false %>
 <div class="tags-cloud glassy-bg" align="right">
   <h4>Tags</h4>
